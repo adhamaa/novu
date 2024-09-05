@@ -65,7 +65,7 @@ services:
       API_CONTEXT_PATH: ${API_CONTEXT_PATH}
       IS_MULTI_TENANCY_ENABLED: ${IS_MULTI_TENANCY_ENABLED}
     ports:
-      - '3000:3000'
+      - '${API_PORT}:3000'
   worker:
     image: 'ghcr.io/novuhq/novu/worker:0.24.0'
     depends_on:
@@ -125,7 +125,7 @@ services:
       NEW_RELIC_APP_NAME: ${NEW_RELIC_APP_NAME}
       NEW_RELIC_LICENSE_KEY: ${NEW_RELIC_LICENSE_KEY}
     ports:
-      - '3002:3002'
+      - '${WS_PORT}:3002'
   web:
     image: 'ghcr.io/novuhq/novu/web:0.24.0'
     depends_on:
@@ -146,7 +146,7 @@ services:
       REACT_APP_WS_URL: ${REACT_APP_WS_URL}
       IS_MULTI_TENANCY_ENABLED: ${IS_MULTI_TENANCY_ENABLED}
     ports:
-      - 4200:4200
+      - ${WEB_PORT}:4200
   widget:
     image: 'ghcr.io/novuhq/novu/widget:0.24.0'
     depends_on:
@@ -166,7 +166,7 @@ services:
       REACT_APP_ENVIRONMENT: ${NODE_ENV}
       WIDGET_CONTEXT_PATH: ${WIDGET_CONTEXT_PATH}
     ports:
-      - 4500:4500
+      - ${WIDGET_PORT}:4500
   embed:
     depends_on:
       - widget
@@ -183,6 +183,6 @@ services:
       NEW_RELIC_APP_NAME: ${NEW_RELIC_APP_NAME}
       NEW_RELIC_LICENSE_KEY: ${NEW_RELIC_LICENSE_KEY}
     ports:
-      - 4701:4701
+      - ${WIDGET_EMBED_PORT}:4701
 volumes:
   mongodb: ~
